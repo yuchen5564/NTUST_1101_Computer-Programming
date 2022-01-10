@@ -1,0 +1,66 @@
+#pragma warning (disable:4996)
+#pragma warning (disable:6031)
+
+#include <stdio.h>
+#include <string.h>
+
+int getword(char* p) {
+	int ch = 0;
+	while ((ch = getchar()) != ' ') {
+		if (ch == '\n') {
+			return 1;
+		}
+		*p = ch;
+		p++;
+	}
+}
+
+void clear(char* p) {
+	int len = strlen(p);
+	for (int i = 0; i < len; i++) {
+		p[i] = '\0';
+		//printf(".");
+	}
+}
+
+void output(char* p) {
+	for (p; *p != '\0'; p++) {
+		printf("%c", *p);
+	}
+	printf("\n");
+}
+
+int main() {
+	char word[31] = { '\0' }, message[101] = { '\0' };
+	int num = 0;
+	scanf("%d", &num);
+	for (int i = 0; i < num; i++) {
+		do {
+			int alphabet = 0;
+			int n = 0;
+			do {
+				n = getword(&word);
+				int len = strlen(word);
+				if (len < (alphabet + 1)) {
+					continue;
+				}
+				message[alphabet] = word[alphabet];
+				clear(&word);
+				alphabet++;
+			} while (n != 1);
+			output(&message);
+			clear(&message);
+		} while (getchar() != '\n');
+	}
+	
+	
+	
+
+	//===============================================
+	//test
+	/*for (char* p = &message; *p != '\0'; p++) {
+		printf("%c", *p);
+	}*/
+	//printf("%c", message[alphabet]);
+	return 0;
+}

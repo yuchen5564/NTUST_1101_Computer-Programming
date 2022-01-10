@@ -1,0 +1,94 @@
+#pragma warning(disable : 4996)
+#pragma warning(disable : 6031)
+#include <stdio.h>
+
+#define N 12
+
+/*
+* 輸入
+* 找到右邊起點
+* 以左邊為基準，移動
+* 輸出
+*/
+
+int main()
+{
+    char maze[N][N+1] = { '\0' };
+    int x = 0, y = 0;
+    //======================================
+    //輸入
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N+1; j++) {
+            scanf("%c", &maze[i][j]);
+            if ((j == 0) && (maze[i][j]) == 'X') {
+                x = j;
+                y = i;
+                maze[y][x] = 'R';
+            }
+        }
+    }
+    //printf("IN: (%d, %d)\n", x, y);
+    //======================================
+    //執行
+    int t = 0;
+    do{
+        if (maze[y - 1][x] == 'X') {
+            y--;
+            maze[y][x] = 'R';
+        }
+        else if (maze[y][x + 1] == 'X') {
+            x++;
+            maze[y][x] = 'R';
+        }
+        else if (maze[y + 1][x] == 'X') {
+            y++;
+            maze[y][x] = 'R';
+        }
+        else if (maze[y][x - 1] == 'X') {
+            x--;
+            maze[y][x] = 'R';
+        }
+        else {
+            
+            
+            if (maze[y][x + 1] == 'R') {
+                x++;
+                maze[y][x] = 'R';
+            }
+            else if (maze[y + 1][x] == 'R') {
+                y++;
+                maze[y][x] = 'R';
+            }
+            else if (maze[y][x - 1] == 'R') {
+            x--;
+            maze[y][x] = 'R';
+            }
+            else if (maze[y - 1][x] == 'R') {
+            y--;
+            maze[y][x] = 'R';
+            }
+             
+        }
+       //t++;
+    } //while (t < 10000);
+    while (x != N - 1 && x != 0);
+    //======================================
+    //輸出
+    int f = 0;
+    for (int i = 0; i < N; i++) {
+        if (maze[i][N - 1] == 'R') {
+            f = 1;
+            break;
+        }
+    }
+    
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N+1; j++) {
+            printf("%c", maze[i][j]);
+        }
+    }
+    if (f == 0) {
+        printf("This maze has no solution\n");
+    }
+    return 0;
+}

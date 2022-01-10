@@ -1,0 +1,218 @@
+#pragma warning(disable : 4996)
+#pragma warning(disable : 6031)
+#include <stdio.h>
+
+#define N 12
+typedef enum { UP, DOWN, RIGHT, LEFT }face;
+
+/*
+* 輸入
+* 找到右邊起點
+* 以左邊為基準，移動
+* 輸出
+*/
+
+
+
+int main()
+{
+    char maze[N][N+1] = { '\0' };
+    int x = 0, y = 0;
+    //======================================
+    //輸入
+    
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N+1; j++) {
+            scanf("%c", &maze[i][j]);
+            if ((j == 0) && (maze[i][j]) == 'X') {
+                x = j;
+                y = i;
+                maze[y][x] = 'R';
+            }
+        }
+    }
+    printf("IN: (%d, %d)\n", x, y);
+    //======================================
+    //執行
+    int t = 0;
+    face p = RIGHT;
+    char up, down, right, left;
+    do {
+        
+        up = maze[y - 1][x];
+        down = maze[y + 1][x];
+        right = maze[y][x + 1];
+        left = maze[y][x - 1];
+        switch (p) {
+        case RIGHT:
+            if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else {
+                if (right == 'R') {
+                    x++;
+                    p = RIGHT;
+                }
+                else if (down == 'R') {
+                    y++;
+                    p = DOWN;
+                }
+                else if (left == 'R') {
+                    x--;
+                    p = LEFT;
+                }
+                else if (up == 'R') {
+                    y--;
+                    p = UP;
+                }
+            }
+            break;
+        case LEFT:
+            if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else {
+                if (left == 'R') {
+                    x--;
+                    p = LEFT;
+                }
+                else if (up == 'R') {
+                    y--;
+                    p = UP;
+                }
+                else if (right == 'R') {
+                    x++;
+                    p = RIGHT;
+                }
+                else if (down == 'R') {
+                    y++;
+                    p = DOWN;
+                }
+            }
+            break;
+        case UP:
+            if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else {
+                if (up == 'R') {
+                    y--;
+                    p = UP;
+                }
+                else if (right == 'R') {
+                    x++;
+                    p = RIGHT;
+                }
+                else if (down == 'R') {
+                    y++;
+                    p = DOWN;
+                }
+                else if (left == 'R') {
+                    x--;
+                    p = LEFT;
+                }
+            }
+            break;
+        case DOWN:
+            if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else {
+                if (down == 'R') {
+                    y++;
+                    p = DOWN;
+                }
+                else if (left == 'R') {
+                    x--;
+                    p = LEFT;
+                }
+                else if (up == 'R') {
+                    y--;
+                    p = UP;
+                }
+                else if (right == 'R') {
+                    x++;
+                    p = RIGHT;
+                }
+            }
+            break;
+        }
+        maze[y][x] = 'R';
+        t++;
+    } while (x != N -1&& t<100);
+    //while (t < 1000);
+    
+    //while (x != N - 1 && x != 0);
+    //======================================
+    //輸出
+    
+    int f = 0;
+    for (int i = 0; i < N; i++) {
+        if (maze[i][N - 1] == 'R') {
+            f = 1;
+            break;
+        }
+    }
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N + 1; j++) {
+            printf("%c", maze[i][j]);
+        }
+    }
+    if (f == 0) {
+        printf("This maze has no solution\n");
+    }
+    return 0;
+}

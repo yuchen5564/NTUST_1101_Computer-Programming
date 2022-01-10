@@ -1,0 +1,167 @@
+do {
+        maze[y][x] = 'R';
+        up = maze[y - 1][x];
+        down = maze[y + 1][x];
+        right = maze[y][x + 1];
+        left = maze[y][x - 1];
+        switch (p) {
+        case RIGHT:
+            if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            break;
+        case LEFT:
+            if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            break;
+        case UP:
+            if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            break;
+        case DOWN:
+            if (right == 'X') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X') {
+                y--;
+                p = UP;
+            }
+            break;
+        }
+
+        t++;
+    } while (t < 100);
+==============================================
+do {
+        maze[y][x] = 'R';
+        up = maze[y - 1][x];
+        down = maze[y + 1][x];
+        right = maze[y][x + 1];
+        left = maze[y][x - 1];
+        switch (p) {
+        case RIGHT:
+            if (up == 'X' || up == 'R') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X' || right == 'R') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X' || down == 'R') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X' || left == 'R') {
+                x--;
+                p = LEFT;
+            }
+            break;
+        case LEFT:
+            if (down == 'X' || down == 'R') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X' || left == 'R') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X' || up == 'R') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X' || right == 'R') {
+                x++;
+                p = RIGHT;
+            }
+            break;
+        case UP:
+            if (left == 'X' || left == 'R') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X' || up == 'R') {
+                y--;
+                p = UP;
+            }
+            else if (right == 'X' || right == 'R') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X' || down == 'R') {
+                y++;
+                p = DOWN;
+            }
+            break;
+        case DOWN:
+            if (right == 'X' || right == 'R') {
+                x++;
+                p = RIGHT;
+            }
+            else if (down == 'X' || down == 'R') {
+                y++;
+                p = DOWN;
+            }
+            else if (left == 'X' || left == 'R') {
+                x--;
+                p = LEFT;
+            }
+            else if (up == 'X' || up == 'R') {
+                y--;
+                p = UP;
+            }
+            break;
+        }
+
+        t++;
+    } while (t < 100);
